@@ -40,8 +40,13 @@ class Dice {
 
 const showcase = document.getElementById('showcase');
 const container = document.getElementById('container');
+let currentDice, nextDice;
 
 const d6 = document.getElementById('d6');
 const d6Angles = [[0, 0], [0, 90], [90, 0], [270, 0], [0, 270], [0, 180]];
-
 D6 = new Dice(d6, d6Angles);
+
+const d4 = document.getElementById('d4');
+const d4Angles = [[0, 0], [90, 180], [0, 120], [0, 240]];
+
+D4 = new Dice(d4, d4Angles);

@@ -2,10 +2,15 @@
     --square-side: 200px;
     --translate-forward: calc(var(--square-side) / 2);
     --translate-backward: calc(var(--translate-forward) * -1);
+    --triangle-height: 173.20508075688772px;
+    --translate-forward-d4: calc(var(--triangle-height) / 2);
+    --translate-backward-d4: calc(var(--translate-forward-d4) * -1);
+    --triangle-angle: 19.5deg;
     --center: translate(-50%, -50%);
     --shrink: scale3d(0.25, 0.25, 0.25);
-    --font-lg: 700 128px 'Arimo', sans-serif;
-    --font-sm: 700 64px 'Arimo', sans-serif;
+    --font-lg: 700 128px 'Arimo', 'sans-serif';
+    --font-md: 700 96px 'Arimo', 'sans-serif';
+    --font-sm: 700 64px 'Arimo', 'sans-serif';
     --showcase-height: 125px;
     --container-height: calc(100% - var(--showcase-height));
 }
@@ -48,7 +53,7 @@ body {
     cursor: pointer;
 }
 
-#d6.miniature {
+.miniature {
     animation: Spin 10s linear infinite alternate;
     transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
@@ -91,40 +96,53 @@ body {
     transform: rotateX(90deg) translateY(var(--translate-backward));
 }
 
-
 #d4 {
-    width: var(--square-side);
-    height: var(--square-side);
-    background-color: #fff;
-    transform: rotateX(-87deg) rotateY(291deg) rotateZ(0deg);
+    box-sizing: border-box;
+    background-color: transparent;
+    width: 200px;
+    height: var(--triangle-height);
     transform-style: preserve-3d;
     user-select: none;
     cursor: pointer;
 }
 
 #d4 .faces {
-    width: 0px;
-    height: 0px;
-    border: calc(var(--square-side) / 2) solid transparent;
-    border-top: 0;
-    border-bottom: var(--square-side) solid red;
     position: absolute;
+    box-sizing: border-box;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    background: radial-gradient(#504e4e, #000000);;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
 }
 
 #d4 .front {
     transform-origin: bottom;
-    transform: translateZ(var(--translate-forward)) rotateX(0deg);
+    transform: translateZ(var(--translate-forward-d4)) rotateX(var(--triangle-angle));
 }
 
 #d4 .bottom {
     transform-origin: bottom;
-    transform: rotateX(90deg) translateY(var(--translate-forward));
+    transform: rotateX(90deg) rotateY(180deg) translateY(var(--translate-forward-d4));
 }
 
 #d4 .left {
-    transform-origin: right;
-    transform: rotateY(117deg) translateX(var(--translate-forward)) translateZ(-45px);
-    border-bottom-color:blueviolet;
+    transform-origin: bottom;
+    transform: translateX(-50px) rotateY(240deg) rotateX(var(--triangle-angle));
+}
+
+#d4 .right {
+    transform-origin: bottom;
+    transform: translateX(50px) rotateY(120deg) rotateX(var(--triangle-angle));
+}
+
+#d4 .number {
+    font: var(--font-md);
+    color: #fff;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: var(--center);
 }
 
 .number {
@@ -134,10 +152,6 @@ body {
     top: 50%;
     left: 50%;
     transform: var(--center);
-}
-
-#d4 .number {
-    font: var(--font-sm);
 }
 
 @keyframes Roll {
